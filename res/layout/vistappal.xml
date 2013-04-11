@@ -1,0 +1,121 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/rojo"
+    android:gravity="top"
+    android:orientation="vertical"
+    tools:context=".WhereEat" >
+
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/returnbtn"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/backbtnxml" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:contentDescription="@string/img"
+            android:layout_width="192dp"
+            android:layout_height="44dp"
+            android:src="@drawable/logo_white" />
+        
+        <Button
+            android:id="@+id/infobtn"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/infobtn" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:padding="7dp" >
+
+        <LinearLayout
+            android:id="@+id/tituloCont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:gravity="center" >
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/buscar"
+                android:inputType="textPostalAddress"
+                android:padding="5dp" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/filtrarbtn"
+                android:layout_width="0dip"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn"
+                android:text="@string/filtrar"
+                android:textColor="@color/blanco" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/map" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/botonVistCat"
+                android:layout_width="178dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/btn_hover"
+                android:padding="7dp"
+                android:text="@string/vista_cat"
+                android:textColor="@color/blanco" />
+
+            <Button
+                android:id="@+id/botonVistaGral"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/btn"
+                android:padding="7dp"
+                android:text="@string/vista_gral"
+                android:textColor="@color/blanco" />
+        </LinearLayout>
+
+        <ExpandableListView
+            android:id="@+id/listaCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_marginBottom="17dp"
+            android:layout_weight="0.30"
+            android:transcriptMode="alwaysScroll"
+            android:background="@color/grisLista"
+            android:groupIndicator="@drawable/expanselec" >
+        </ExpandableListView>
+    </LinearLayout>
+
+</LinearLayout>

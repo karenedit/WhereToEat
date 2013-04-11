@@ -1,2 +1,1 @@
-WhereToEat
-==========
+# This is my README

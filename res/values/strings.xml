@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">whereEat</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="Iniciar">Iniciar</string>
+    <string name="registra">Registrate Aquí</string>
+    <string name="registrar">Registrar</string>
+    <string name="filtrar">Filtrar</string>
+    <string name="vista_cat">Vista por Categorias</string>
+    <string name="vista_gral">Vista General</string>
+    <string name="fastfood">Comida Rapida</string>
+    <string name="cafeterias">Cafeterias</string>
+    <string name="pastelerias">Pastelerias</string>
+    <string name="buscar">Buscar</string>
+    <string name="img"></string>
+    <string name="username">Email</string>
+    <string name="Password">Password</string>
+    <string name="registro">Registro</string>
+    <string name="nombre">Nombre</string>
+    <string name="checkIn">Check-In</string>
+    <string name="menu">Menu</string>
+    <string name="fbname">Facebook</string>
+    <string name="checks">13</string>
+    <string name="direccion">Dirección: </string>
+    <string name="tel">Telefono: </string>
+    <string name="horarios">Horarios: </string>
+    <string name="web">Sitio Web: </string>   
+    <string name="addrs">Garza Sada 344</string>
+	<string name="col">Col.Tecnológico</string>
+    <string name="phone">81–23–45–67</string>
+    <string name="dias">Lun-Dom</string>
+    <string name="hras">9am-8pm</string>
+    <string name="paginasalad">http://supersalads.com/</string>
+    <string name="CheckBox_1">Más visitado</string>
+    <string name="CheckBox_2">Visitado por amigos</string>
+    <string name="CheckBox_3">Más cercano</string>
+    <string name="julia">Julia Aracely Ramos Islas</string>
+    <string name="karen">Karen Edith Olvera Torres</string>
+    <string name="version">Version 1.0</string>
+    
+    <color name="casiblanco">#f2f2f2</color>
+    <color name="facebook">#6641ab</color>
+    <color name="link">#0099cc</color>
+	<color name="azul">#4a2f7d</color>
+	<color name="blanco">#ffffff</color>
+	<color name="grisLista">#404040</color>
+	<color name="rojo">#e90000</color>
+</resources>
