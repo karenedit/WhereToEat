@@ -20,10 +20,11 @@ public class databaseHandler extends SQLiteOpenHelper{
 	private static final int DATABASE_VERSION = 1;
 	// Database Name
 	private static final String DATABASE_NAME = "restaurantsManager";
-	// Contacts table name
+	// database tables name
 	private static final String TABLE_RESTAURANTS = "restaurants";
+	private static final String TABLE_CATEGORIES = "categories";
 	
-	// Contacts Table Columns names
+	// Restaurants table columns names
 	private static final String KEY_PID = "pid";
 	private static final String KEY_RESTAURANT = "restaurant";
 	private static final String KEY_SUCURSAL = "sucursal";
@@ -40,6 +41,11 @@ public class databaseHandler extends SQLiteOpenHelper{
 	private static final String KEY_FACEBOOK = "facebook";
 	private static final String KEY_CHECKIN = "checkin";
 	
+	//Categories table columns names
+	private static final String KEY_PID_CATEGORY = "pid";
+	private static final String KEY_CATEGORY_NAME = "category";
+	private static final String KEY_CATEGORY_THUMB = "thumbnail";
+	
 	public databaseHandler(Context context){
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -49,7 +55,7 @@ public class databaseHandler extends SQLiteOpenHelper{
 	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_RESTAURANTS + "(" + 
+		String CREATE_RESTAURANTS_TABLE = "CREATE TABLE " + TABLE_RESTAURANTS + "(" + 
 				KEY_PID + " INTEGER PRIMARY KEY," +
 				KEY_RESTAURANT +" TEXT," + 
 				KEY_SUCURSAL +" TEXT," + 
@@ -65,7 +71,14 @@ public class databaseHandler extends SQLiteOpenHelper{
 				KEY_TWITTER +" TEXT," +
 				KEY_FACEBOOK +" TEXT," +
 				KEY_CHECKIN + " INTEGER" + ")";
-		db.execSQL(CREATE_CONTACTS_TABLE);
+		
+		String CREATE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "(" + 
+				KEY_PID_CATEGORY + " INTEGER PRIMARY KEY," +
+				KEY_CATEGORY_NAME + " TEXT," + 
+				KEY_CATEGORY_THUMB + " TEXT" + ")";
+				
+		db.execSQL(CREATE_RESTAURANTS_TABLE);
+		db.execSQL(CREATE_CATEGORY_TABLE);
 	}
 	
 	/**
@@ -77,6 +90,7 @@ public class databaseHandler extends SQLiteOpenHelper{
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
 		db.execSQL("DROP TABLE IF EXISTS "+ TABLE_RESTAURANTS); // Drop older table if existed 
+		db.execSQL("DROP TABLE IF EXISTS "+ TABLE_CATEGORIES);
 		onCreate(db); //Create tables again
 	}
 	
@@ -105,6 +119,22 @@ public class databaseHandler extends SQLiteOpenHelper{
 		values.put(KEY_CHECKIN, restaurant.getCheckin());
 		
 		db.insert(TABLE_RESTAURANTS, null, values);
+		db.close(); //Closing database connection
+	}
+	
+	/**
+	 * Metodo que agrega una nueva categoria a la base de datos
+	 * @param category
+	 */
+	void addCategory(Category category){
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		Log.i("INSERT", "INSERT = " + category.getId());
+		values.put(KEY_PID_CATEGORY, category.getId());		
+		values.put(KEY_CATEGORY_NAME, category.getCategory());
+		values.put(KEY_CATEGORY_THUMB, category.getThumbnail());
+		
+		db.insert(TABLE_CATEGORIES, null, values);
 		db.close(); //Closing database connection
 	}
 	
@@ -183,6 +213,30 @@ public class databaseHandler extends SQLiteOpenHelper{
 	}
 	
 	/**
+	 * Metodo que regresa una lista con todos los restaurantes de la base de datos
+	 * @return List Restaurant
+	 */
+	public List<Category> getAllCategories() {
+		List<Category> categoriesList = new ArrayList<Category>();
+		//Select All Query
+		String selectQuery = "SELECT * FROM " + TABLE_CATEGORIES;
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do{
+				Category category = new Category();
+				category.setId(Integer.parseInt(cursor.getString(0)));
+				category.setCategory(cursor.getString(1));
+				category.setThumbnail(cursor.getString(2));
+				
+				categoriesList.add(category);
+			}while(cursor.moveToNext());
+		}
+		
+		return categoriesList;
+	}
+	
+	/**
 	 * Metodo que borra el restaurante pasado como parametro de la base de datos
 	 * @param contact
 	 */
@@ -206,5 +260,38 @@ public class databaseHandler extends SQLiteOpenHelper{
 		count = cursor.getCount();
 		cursor.close();
 		return count;
+	}
+	
+	public List<Restaurant> getByCategory(int category){
+		List<Restaurant> restaurantsList = new ArrayList<Restaurant>();
+		//Select All Query
+		String selectQuery = "SELECT * FROM " + TABLE_RESTAURANTS + " WHERE " + KEY_CATEGORY + " = " + category;
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do{
+				Restaurant restaurant = new Restaurant();
+				restaurant.setId(Integer.parseInt(cursor.getString(0)));
+				restaurant.setRestaurant(cursor.getString(1));
+				restaurant.setSucursal(cursor.getString(2));
+				restaurant.setCategory(Integer.parseInt(cursor.getString(3)));
+				restaurant.setThumbnail(cursor.getString(4));
+				restaurant.setXCoordinate(Integer.parseInt(cursor.getString(5)));
+				restaurant.setYCoordinate(Integer.parseInt(cursor.getString(6)));
+				restaurant.setAddress(cursor.getString(7));
+				restaurant.setPhone(cursor.getString(8));
+				restaurant.setHours(cursor.getString(9));
+				restaurant.setImage(cursor.getString(10));
+				restaurant.setWebpage(cursor.getString(11));
+				restaurant.setTwitter(cursor.getString(12));
+				restaurant.setFacebook(cursor.getString(13));
+				restaurant.setCheckin(Integer.parseInt(cursor.getString(14)));
+				//Adding contact to list
+				restaurantsList.add(restaurant);
+			}while(cursor.moveToNext());
+		} else {return null;}
+		
+		return restaurantsList;
 	}
 }

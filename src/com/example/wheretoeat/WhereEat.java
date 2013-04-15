@@ -37,10 +37,12 @@ public class WhereEat extends Activity implements LoadingTaskFinishedListener {
 
 	/* url to get all products list */
 	private static String url_all_restaurants = "http://geekode.systheam.com/andriodAPI/get_restaurants.php";
-
+	private static String url_all_categories = "http://geekode.systheam.com/andriodAPI/get_categories.php";
+	
 	/* JSON Node names */
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_RESTAURANTS = "restaurants";
+	private static final String TAG_CATEGORIES = "categories";
 	private static final String TAG_PID = "pid";
 	private static final String TAG_RESTAURANT = "restaurant";
 	private static final String TAG_SUCURSAL = "sucursal";
@@ -58,6 +60,7 @@ public class WhereEat extends Activity implements LoadingTaskFinishedListener {
 	private static final String TAG_CHECKIN = "checkin";
 	
 	JSONArray restaurants = null; /* products JSONArray */
+	JSONArray categories = null; /* categories JSONARRAY */
  
 	/**
 	* Descripcion del método onCreate: 
@@ -135,21 +138,27 @@ public class WhereEat extends Activity implements LoadingTaskFinishedListener {
 			List<NameValuePair> params1 = new ArrayList<NameValuePair>();
 			// getting JSON string from URL
 			JSONObject json = jParser.makeHttpRequest(url_all_restaurants, "GET", params1);
-			
 			Log.d("All Restaurants: ", json.toString());
+			
+			JSONObject jsonCategories = jParser.makeHttpRequest(url_all_categories, "GET", params1);
+			Log.d("All Categories: ", jsonCategories.toString());
 
 			try {
 				// Checking for SUCCESS TAG
 				int success = json.getInt(TAG_SUCCESS);
-				Log.d("SUCCESS: ", "SUCCESS = " + success);
-				if (success == 1) {
-					// products found
-					// Getting Array of Products
+				int successCategories = jsonCategories.getInt(TAG_SUCCESS);
+				Log.d("SUCCESS: ", "SUCCESS = " + success + "  CATEGORIES = " + successCategories);
+				if (success == 1 && successCategories == 1) {
+					
 					restaurants = json.getJSONArray(TAG_RESTAURANTS);
-
+					categories = jsonCategories.getJSONArray(TAG_CATEGORIES);
+					
+					int total = restaurants.length() + categories.length();
+					int loading = 1;
+					
 					// looping through All Products
 					for (int i = 0; i < restaurants.length(); i++) {
-						downloadResources(i + 1, restaurants.length());
+						downloadResources(loading, total);
 						JSONObject c = restaurants.getJSONObject(i);
 						Log.i("JSON" , "JSON = " + c.toString());
 						
@@ -188,6 +197,26 @@ public class WhereEat extends Activity implements LoadingTaskFinishedListener {
 						
 						db.addRestaurant(new Restaurant(id, category, xCoordinate, yCoordinate, checkin, restaurant,
 							sucursal, thumbnail, address, phone, hours, image, webpage, twitter, facebook));					
+						
+						loading ++;
+					}
+					
+					for(int i = 0; i < categories.length(); i++){
+						downloadResources(loading, total);
+						JSONObject c = categories.getJSONObject(i);
+						Log.i("JSON" , "JSON = " + c.toString());
+
+						int id = c.getInt(TAG_PID);
+						String category = c.getString(TAG_CATEGORY);
+						String thumbnail = c.getString(TAG_THUMBNAIL);
+						
+						Log.d("JSON", "JSON id = " + id);
+						Log.d("JSON", "JSON category = " + category);
+						Log.d("JSON", "JSON thumbnail = " + thumbnail);
+						
+						db.addCategory(new Category(id, category, thumbnail));					
+						
+						loading ++;
 					}
 				} 							
 			} catch (JSONException e) {

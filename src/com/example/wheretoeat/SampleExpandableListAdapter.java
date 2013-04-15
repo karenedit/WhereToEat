@@ -26,6 +26,7 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
     int _objInt;
     private static final int GROUP_ITEM_RESOURCE = R.layout.groupitem;
     private static final int CHILD_ITEM_RESOURCE = R.layout.explistchild;
+    List<Category> categories = null;
     List<Restaurant> restaurants = null;
     databaseHandler db;
     private static final String[][] data = 
@@ -40,9 +41,14 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
        // this.restaurants = restaurants;
         this.context = context;
         db = new databaseHandler(this.context);
+        updateRestaurants();
         restaurants = db.getAllRestaurants();
         vi = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         _objInt = data.length;
+    }
+    
+    public void updateRestaurants(){
+    	categories = db.getAllCategories();
     }
 
     /**getChild: obtiene el hijo del expandable list
@@ -84,31 +90,55 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         View v = convertView;
         String child = getChild(groupPosition, childPosition);
-        int id_res = 0;
+       // int id_res = 0;
         
         Log.i("EXPANDABLE", "CHILD = " + childPosition);
         
         if(groupPosition == 0){
-                if(childPosition == 0) id_res = R.drawable.polloloco;
-                if(childPosition == 1) id_res = R.drawable.starbucks;
-                if(childPosition == 2) id_res = R.drawable.carls;
+        	restaurants = db.getByCategory(0);
+        	Log.i("DATABASE", "DATABASE restaurants length = " + restaurants.size());
+        	//if(childPosition == 0) id_res = R.drawable.polloloco;
+            //if(childPosition == 1) id_res = R.drawable.starbucks;
+            //if(childPosition == 2) id_res = R.drawable.carls;
+        	if (child != null && restaurants != null) {
+                v = vi.inflate(CHILD_ITEM_RESOURCE, null);
+                ViewHolder holder = new ViewHolder(v);
+                holder.text.setText(Html.fromHtml(restaurants.get(childPosition).restaurant + " " + restaurants.get(childPosition).sucursal));
+                holder.imageview.setImageResource(R.drawable.salads);
+            }
         }
         else if(groupPosition == 1){
-                if(childPosition == 0) id_res = R.drawable.mcdonalds;
-                if(childPosition == 1) id_res = R.drawable.costeno;
+        	restaurants = db.getByCategory(1);
+        	Log.i("DATABASE", "DATABASE restaurants length = " + restaurants.size());
+            //if(childPosition == 0) id_res = R.drawable.mcdonalds;
+            //if(childPosition == 1) id_res = R.drawable.costeno;
+        	if (child != null && restaurants != null) {
+                v = vi.inflate(CHILD_ITEM_RESOURCE, null);
+                ViewHolder holder = new ViewHolder(v);
+                holder.text.setText(Html.fromHtml(restaurants.get(childPosition).restaurant + " " + restaurants.get(childPosition).sucursal));
+                holder.imageview.setImageResource(R.drawable.salads);
+            }
         }
         else if(groupPosition == 2){
-                if(childPosition == 0) id_res = R.drawable.kfc;
-                if(childPosition == 1) id_res = R.drawable.alitas;
-                if(childPosition == 2) id_res = R.drawable.salads;
+        	restaurants = db.getByCategory(2);  
+        	Log.i("DATABASE", "DATABASE restaurants length = " + restaurants.size());
+        	//if(childPosition == 0) id_res = R.drawable.kfc;
+            //if(childPosition == 1) id_res = R.drawable.alitas;
+            //if(childPosition == 2) id_res = R.drawable.salads;
+        	if (child != null && restaurants != null) {
+                v = vi.inflate(CHILD_ITEM_RESOURCE, null);
+                ViewHolder holder = new ViewHolder(v);
+                holder.text.setText(Html.fromHtml(restaurants.get(childPosition).restaurant + " " + restaurants.get(childPosition).sucursal));
+                holder.imageview.setImageResource(R.drawable.salads);
+            }
         }
        
-        if (child != null) {
-            v = vi.inflate(CHILD_ITEM_RESOURCE, null);
-            ViewHolder holder = new ViewHolder(v);
-            holder.text.setText(Html.fromHtml(child));
-            holder.imageview.setImageResource(id_res);
-        }
+        //if (child != null) {
+          //  v = vi.inflate(CHILD_ITEM_RESOURCE, null);
+          //  ViewHolder holder = new ViewHolder(v);
+           // holder.text.setText(Html.fromHtml(child));
+           // holder.imageview.setImageResource(id_res);
+        //}
         return v;
     }
     
@@ -152,7 +182,7 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
         int id_res = 0;
         long group_id = getGroupId(groupPosition);
        
-        //Log.i("EXPANDABLE", "GROUP = " + groupPosition);
+        Log.i("EXPANDABLE", "GROUP = " + groupPosition);
         
         if(group_id == 0){
                 group = "Cafeterias";
