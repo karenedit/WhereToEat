@@ -35,6 +35,7 @@ public class databaseHandler extends SQLiteOpenHelper{
 	private static final String KEY_ADDRESS = "address";
 	private static final String KEY_PHONE = "phone";
 	private static final String KEY_HOURS = "hours";
+	private static final String KEY_DAYS = "days";
 	private static final String KEY_IMAGE = "image";
 	private static final String KEY_WEBPAGE = "webpage";
 	private static final String KEY_TWITTER = "twitter";
@@ -66,6 +67,7 @@ public class databaseHandler extends SQLiteOpenHelper{
 				KEY_ADDRESS +" TEXT," +
 				KEY_PHONE +" TEXT," +
 				KEY_HOURS +" TEXT," +
+				KEY_DAYS +" TEXT," +
 				KEY_IMAGE +" TEXT," +
 				KEY_WEBPAGE +" TEXT," +
 				KEY_TWITTER +" TEXT," +
@@ -112,6 +114,7 @@ public class databaseHandler extends SQLiteOpenHelper{
 		values.put(KEY_ADDRESS, restaurant.getAddress());
 		values.put(KEY_PHONE, restaurant.getPhone());
 		values.put(KEY_HOURS, restaurant.getHours());
+		values.put(KEY_DAYS, restaurant.getDays());
 		values.put(KEY_IMAGE, restaurant.getImage());
 		values.put(KEY_WEBPAGE, restaurant.getWebpage());
 		values.put(KEY_TWITTER, restaurant.getTwitter());
@@ -149,7 +152,7 @@ public class databaseHandler extends SQLiteOpenHelper{
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(TABLE_RESTAURANTS, 
 				new String[]{KEY_PID, KEY_RESTAURANT, KEY_SUCURSAL, KEY_CATEGORY, KEY_THUMBNAIL, KEY_XCOORDINATE,
-				KEY_YCOORDINATE, KEY_ADDRESS, KEY_PHONE, KEY_HOURS, KEY_IMAGE, KEY_WEBPAGE, KEY_TWITTER, KEY_FACEBOOK,
+				KEY_YCOORDINATE, KEY_ADDRESS, KEY_PHONE, KEY_HOURS,KEY_DAYS, KEY_IMAGE, KEY_WEBPAGE, KEY_TWITTER, KEY_FACEBOOK,
 				KEY_CHECKIN}, KEY_PID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
 		
 		if (cursor != null) cursor.moveToFirst();
@@ -169,7 +172,8 @@ public class databaseHandler extends SQLiteOpenHelper{
 				cursor.getString(11), 
 				cursor.getString(12), 
 				cursor.getString(13), 
-				cursor.getString(14)
+				cursor.getString(14),
+				cursor.getString(15)
 		);
 		
 		return restaurant; //return restaurant
@@ -199,11 +203,12 @@ public class databaseHandler extends SQLiteOpenHelper{
 				restaurant.setAddress(cursor.getString(7));
 				restaurant.setPhone(cursor.getString(8));
 				restaurant.setHours(cursor.getString(9));
-				restaurant.setImage(cursor.getString(10));
-				restaurant.setWebpage(cursor.getString(11));
-				restaurant.setTwitter(cursor.getString(12));
-				restaurant.setFacebook(cursor.getString(13));
-				restaurant.setCheckin(Integer.parseInt(cursor.getString(14)));
+				restaurant.setDays(cursor.getString(10));
+				restaurant.setImage(cursor.getString(11));
+				restaurant.setWebpage(cursor.getString(12));
+				restaurant.setTwitter(cursor.getString(13));
+				restaurant.setFacebook(cursor.getString(14));
+				restaurant.setCheckin(Integer.parseInt(cursor.getString(15)));
 				//Adding contact to list
 				restaurantsList.add(restaurant);
 			}while(cursor.moveToNext());
@@ -282,11 +287,12 @@ public class databaseHandler extends SQLiteOpenHelper{
 				restaurant.setAddress(cursor.getString(7));
 				restaurant.setPhone(cursor.getString(8));
 				restaurant.setHours(cursor.getString(9));
-				restaurant.setImage(cursor.getString(10));
-				restaurant.setWebpage(cursor.getString(11));
-				restaurant.setTwitter(cursor.getString(12));
-				restaurant.setFacebook(cursor.getString(13));
-				restaurant.setCheckin(Integer.parseInt(cursor.getString(14)));
+				restaurant.setDays(cursor.getString(10));
+				restaurant.setImage(cursor.getString(11));
+				restaurant.setWebpage(cursor.getString(12));
+				restaurant.setTwitter(cursor.getString(13));
+				restaurant.setFacebook(cursor.getString(14));
+				restaurant.setCheckin(Integer.parseInt(cursor.getString(15)));
 				//Adding contact to list
 				restaurantsList.add(restaurant);
 			}while(cursor.moveToNext());

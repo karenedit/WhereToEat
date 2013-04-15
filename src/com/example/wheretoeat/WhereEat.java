@@ -53,6 +53,7 @@ public class WhereEat extends Activity implements LoadingTaskFinishedListener {
 	private static final String TAG_ADDRESS = "address";
 	private static final String TAG_PHONE = "phone";
 	private static final String TAG_HOURS = "hours";
+	private static final String TAG_DAYS = "days";
 	private static final String TAG_IMAGE = "image";
 	private static final String TAG_WEBPAGE = "webpage";
 	private static final String TAG_TWITTER = "twitter";
@@ -175,6 +176,7 @@ public class WhereEat extends Activity implements LoadingTaskFinishedListener {
 						String address = c.getString(TAG_ADDRESS);
 						String phone = c.getString(TAG_PHONE);
 						String hours = c.getString(TAG_HOURS);
+						String days = c.getString(TAG_DAYS);
 						String webpage = c.getString(TAG_WEBPAGE);
 						String twitter = c.getString(TAG_TWITTER);
 						String facebook = c.getString(TAG_FACEBOOK);
@@ -190,13 +192,14 @@ public class WhereEat extends Activity implements LoadingTaskFinishedListener {
 						Log.d("JSON", "JSON address = " + address);
 						Log.d("JSON", "JSON phone = " + phone);
 						Log.d("JSON", "JSON hours = " + hours);
+						Log.d("JSON", "JSON days = " + days);
 						Log.d("JSON", "JSON image = " + image);
 						Log.d("JSON", "JSON webpage = " + webpage);
 						Log.d("JSON", "JSON twitter = " + twitter);
 						Log.d("JSON", "JSON facebook = " + facebook);
 						
 						db.addRestaurant(new Restaurant(id, category, xCoordinate, yCoordinate, checkin, restaurant,
-							sucursal, thumbnail, address, phone, hours, image, webpage, twitter, facebook));					
+							sucursal, thumbnail, address, phone, hours, days, image, webpage, twitter, facebook));					
 						
 						loading ++;
 					}

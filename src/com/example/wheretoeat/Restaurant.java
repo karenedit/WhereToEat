@@ -13,6 +13,7 @@ public class Restaurant {
 	String address;
 	String phone;
 	String hours;
+	String days;
 	String image;
 	String webpage;
 	String twitter;
@@ -36,7 +37,7 @@ public class Restaurant {
 	 * @param thumbnail
 	 */
 	public Restaurant(int id, int category, int xCoordinate, int yCoordinate, int checkin, String restaurant, 
-			String sucursal, String thumbnail, String address, String phone, String hours, String image, String webpage,
+			String sucursal, String thumbnail, String address, String phone, String hours, String days, String image, String webpage,
 			String twitter, String facebook){
 		this.id = id;
 		this.category = category;
@@ -49,6 +50,7 @@ public class Restaurant {
 		this.address = address;
 		this.phone = phone;
 		this.hours = hours;
+		this.days = days;
 		this.image = image;
 		this.webpage = webpage;
 		this.twitter = twitter;
@@ -66,6 +68,7 @@ public class Restaurant {
 	public void setAddress(String address){ this.address = address; }
 	public void setPhone(String phone){ this.phone = phone; }
 	public void setHours(String hours){ this.hours = hours; }
+	public void setDays(String days){ this.days = days; }
 	public void setImage(String image){ this.image = image; }
 	public void setWebpage(String webpage){ this.webpage = webpage; }
 	public void setTwitter(String twitter){ this.twitter = twitter; }
@@ -82,6 +85,7 @@ public class Restaurant {
 	public String getAddress(){ return this.address; }
 	public String getPhone(){ return this.phone; }
 	public String getHours(){ return this.hours; }
+	public String getDays(){ return this.days; }
 	public String getImage(){ return this.image; }
 	public String getWebpage(){ return this.webpage; }
 	public String getTwitter(){ return this.twitter; }
