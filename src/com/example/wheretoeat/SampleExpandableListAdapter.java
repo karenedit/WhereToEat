@@ -5,7 +5,6 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +39,11 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
     List<Restaurant> comidaMexicana = null;
     List<Restaurant> pizzas = null;
     List<Restaurant> otros = null;
-    
-    
+   
     databaseHandler db;
-    
+    DrawableManager imagemg;
+   
+    String imageHttpAddress = "http://geekode.systheam.com/images/carlss.png";
   
     //constructor
     public SampleExpandableListAdapter(Context context, Activity activity) {
@@ -59,7 +59,6 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
     public void updateRestaurants(){
     	int category = 0;
     	categories = db.getAllCategories();
-    	Log.i("CATEGORIES", "CATEGORIES = " + categories.size());
     	for(int i = 0; i < categories.size(); i++){
     		category = categories.get(i).id;
     		switch(category){
@@ -135,24 +134,24 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
      */
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         View v = convertView;
-        //String child = getChild(groupPosition, childPosition);
-        //String child = null;
         int category = categories.get(groupPosition).id;
-        //int id_res = 0;
         String restaurantName = "";
+        String loadedImage = "";
         
-        Log.i("EXPANDABLE", "CHILD = " + childPosition);
-        Log.i("EXPANDABLE", "CHILD CATEGORY = " + category);
-
+        v = vi.inflate(CHILD_ITEM_RESOURCE, null);
+        final ViewHolder holder = new ViewHolder(v);
+        
 		switch(category){
 			case 1: 
 				restaurantName = comidaRapida.get(childPosition).restaurant + " " + comidaRapida.get(childPosition).sucursal;
+				loadedImage = comidaRapida.get(childPosition).thumbnail;
 				break;
 			case 2: 
 				restaurantName = comidaOriental.get(childPosition).restaurant + " " + comidaOriental.get(childPosition).sucursal;
 				break;
 			case 3: 
 				restaurantName = ensaladas.get(childPosition).restaurant + " " + ensaladas.get(childPosition).sucursal;
+				loadedImage = ensaladas.get(childPosition).thumbnail;
 				break;
 			case 4: 
 				restaurantName = cafeterias.get(childPosition).restaurant + " " + cafeterias.get(childPosition).sucursal;
@@ -182,44 +181,58 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
 				restaurantName = otros.get(childPosition).restaurant + " " + otros.get(childPosition).sucursal;
 				break;
 		}
-		
-		v = vi.inflate(CHILD_ITEM_RESOURCE, null);
-        ViewHolder holder = new ViewHolder(v);
+				
         holder.text.setText(Html.fromHtml(restaurantName));
-        holder.imageview.setImageResource(R.drawable.salads);
-    	
-        /*if (child != null) {
-            v = vi.inflate(CHILD_ITEM_RESOURCE, null);
-            ViewHolder holder = new ViewHolder(v);
-            holder.text.setText(Html.fromHtml("Hola"));
-            holder.imageview.setImageResource(R.drawable.salads);
-        }*/
-        
-        /*if(groupPosition == 0){
-        	if (child != null) {
-                v = vi.inflate(CHILD_ITEM_RESOURCE, null);
-                ViewHolder holder = new ViewHolder(v);
-                holder.text.setText(Html.fromHtml("Hola"));
-                holder.imageview.setImageResource(R.drawable.salads);
-            }
-        }else if(groupPosition == 1){
-        	if (child != null) {
-                v = vi.inflate(CHILD_ITEM_RESOURCE, null);
-                ViewHolder holder = new ViewHolder(v);
-                holder.text.setText(Html.fromHtml("Hola"));
-                holder.imageview.setImageResource(R.drawable.salads);
-            }
-        }else if(groupPosition == 2){
-        	if (child != null) {
-                v = vi.inflate(CHILD_ITEM_RESOURCE, null);
-                ViewHolder holder = new ViewHolder(v);
-                holder.text.setText(Html.fromHtml("Hola"));
-                holder.imageview.setImageResource(R.drawable.salads);
-            }
-        }*/
+        holder.imageview.setImageResource(context.getResources().getIdentifier(loadedImage, "drawable", context.getPackageName()));
+        //holder.imageview.setImageResource(R.drawable.salads);
+        //holder.imageview.setImageBitmap(loadedImage);
+        //holder.imageview.setImageDrawable(loadedImage);
 
         return v;
     }
+    
+    /*private InputStream OpenHttpConnection(String urlString) throws IOException{
+    	InputStream in = null; 
+    	int response = -1;
+    	                
+    	URL url = new URL(urlString); 
+    	URLConnection conn = url.openConnection();
+    	                  
+    	if (!(conn instanceof HttpURLConnection)) throw new IOException("Not an HTTP connection");
+    	         
+    	try{
+    		HttpURLConnection httpConn = (HttpURLConnection) conn;
+    	    Log.i("Connecting ... ", "Connection = " + httpConn);
+    		httpConn.setAllowUserInteraction(false);
+    	    httpConn.setInstanceFollowRedirects(true);
+    	    httpConn.setRequestMethod("GET");
+    	    httpConn.connect(); 
+    	 
+    	    response = httpConn.getResponseCode();                 
+    	    if (response == HttpURLConnection.HTTP_OK) {
+    	    	in = httpConn.getInputStream();                                 
+    	    }                     
+    	} catch (Exception ex){
+    		throw new IOException("Error connecting");            
+    	}
+    	
+    	return in;     
+    }
+    	    
+    private Bitmap DownloadImage(String URL){        
+    	Bitmap bitmap = null;
+    	InputStream in = null;        
+    	try {
+    		in = OpenHttpConnection(URL);
+    		bitmap = BitmapFactory.decodeStream(in);
+    	    in.close();
+    	} catch (IOException e1) {
+    		// TODO Auto-generated catch block
+    		e1.printStackTrace();
+    	}
+    	        
+    	return bitmap;                
+    }*/
     
     /**getGroup : obtiene el grupo (Parent o Child)
      * @param groupPosition - posicion del grupo
@@ -258,33 +271,15 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         View v = convertView;
         String group = null;
-        //int id_res = 0;
-        //long group_id = getGroupId(groupPosition);
-       
-        Log.i("EXPANDABLE", "GROUP = " + groupPosition);
-       /* if(group_id == 0){
-                group = "Cafeterias";
-                id_res = R.drawable.cafe;
-        }
-        else if(group_id == 1){
-                group = "Pasteles";
-                id_res = R.drawable.pasteleria;
-        }
-        else if(group_id == 2){
-                group = "FastFood";
-                id_res = R.drawable.comidarapida;
-        }*/
        
         group = categories.get(groupPosition).category;
-        Log.i("CATEGORIES", "CATEGORY = " + group);
         if (group != null) {
             v = vi.inflate(GROUP_ITEM_RESOURCE, null);
             ViewHolder holder = new ViewHolder(v);
-
             holder.text.setText(Html.fromHtml(group));
             holder.imageview.setImageResource(R.drawable.cafe);
-             
         }
+        
         return v;
     }
     

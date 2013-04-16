@@ -1,4 +1,6 @@
 package com.example.wheretoeat;
+import java.util.List;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,31 +18,37 @@ import android.widget.ImageView;
  */
 public class RestauranteAdapter extends BaseAdapter {
     private Context mContext;
+    databaseHandler db;
+    List<Restaurant> restaurant = null;
     
     // arreglo de las imagenes
-    public Integer[] mThumbIds = {
-    		  R.drawable.alitas,
-              R.drawable.kfc,
-              R.drawable.carls,
-              R.drawable.mcdonalds,
-              R.drawable.polloloco,
-              R.drawable.salads,
-              R.drawable.starbucks
-    };
+   // public Integer[] mThumbIds = {
+    //		  R.drawable.alitas,
+      //        R.drawable.kfc,
+        //      R.drawable.carls,
+          //    R.drawable.mcdonalds,
+            //  R.drawable.polloloco,
+        //      R.drawable.salads,
+          //    R.drawable.starbucks
+    //};
  
     // Constructor
     public RestauranteAdapter(Context c){
         mContext = c;
+        db = new databaseHandler(mContext);
+        restaurant = db.getAllRestaurants(); 
     }
  
     @Override
     public int getCount() {
-        return mThumbIds.length;
+        //return mThumbIds.length;
+    	return restaurant.size();
     }
  
     @Override
     public Object getItem(int position) {
-        return mThumbIds[position];
+        //return mThumbIds[position];
+    	return restaurant.get(position);
     }
  
     @Override
@@ -50,10 +58,12 @@ public class RestauranteAdapter extends BaseAdapter {
  
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //se crea una nueva ImageView
+        String loadedImage = restaurant.get(position).thumbnail;
+    	
+    	//se crea una nueva ImageView
     	ImageView imageView = new ImageView(mContext);
     	//se asigna un valor del arreglo
-        imageView.setImageResource(mThumbIds[position]);
+        imageView.setImageResource(mContext.getResources().getIdentifier(loadedImage, "drawable", mContext.getPackageName()));
         //se asigna una escala
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         //se asignan parametros del layout

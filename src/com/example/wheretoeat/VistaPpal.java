@@ -30,12 +30,7 @@ public class VistaPpal extends Activity  implements OnClickListener {
 
 	databaseHandler db = new databaseHandler(this);
 	final Context context = this;
-    /*private static final String[][] data = 
-    	{
-    		{"Pollo Loco","Starbucks","Carls Jr"},
-    		{"Mc Donalds","Costeñito"},
-    		{"KFC","Las Alitas","Super Salads"}
-    	};*/
+   
     private ExpandableListView expandableListView;
    	List<Restaurant> restaurants = new LinkedList<Restaurant>();
     Button button1;

@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
  * @author Karen Olvera 807308
  *
  */
-
 public class VistaGral extends Activity implements OnClickListener {
 	//se declaran variables
 	LinearLayout ll;
@@ -39,7 +38,6 @@ public class VistaGral extends Activity implements OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //se asigna el layout corresponidente a la pantalla
         setContentView(R.layout.vistagral);
-        
         
         //se buscan elementos de la vista a traves de su id
         Button botonVistCat = (Button) findViewById(R.id.botonVistCat);        
@@ -63,8 +61,6 @@ public class VistaGral extends Activity implements OnClickListener {
     			Intent intent = new Intent(VistaGral.this, Restaurante.class);
     			startActivity(intent);
 			}
-
-			
 		});
 
     	//se le asigna el Adapater al gridView
