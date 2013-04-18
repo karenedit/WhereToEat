@@ -44,195 +44,204 @@
         android:orientation="vertical"
         android:padding="7dp" >
 
-        <LinearLayout
-            android:id="@+id/tituloCont"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:gravity="center" >
-
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/border"
-                android:ems="10"
-                android:hint="@string/buscar"
-                android:inputType="textPostalAddress"
-                android:padding="5dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="101dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/spr" >
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="242dp"
-            android:baselineAligned="false"
-            android:orientation="horizontal" >
-
             <LinearLayout
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/contenido"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
                 android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/direccion" />
+                <ImageView
+                    android:id="@+id/imgRest"
+                    android:layout_width="match_parent"
+                    android:layout_height="101dp"
+                    android:layout_marginTop="3dp"
+                    android:contentDescription="@string/img" />
 
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/addrs" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/col" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/tel" />
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/phone" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/horarios" />
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/dias" />
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/hras" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/web" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/paginasalad"
-                    android:textColor="@color/link" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.01"
-                android:baselineAligned="false"
-                android:orientation="horizontal" >
+<ScrollView
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
                 <LinearLayout
-                    android:layout_width="0dip"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.49"
-                    android:orientation="vertical" >
+                    android:layout_gravity="top"
+                    android:layout_weight="37558.50"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal" >
 
                     <LinearLayout
-                        android:layout_width="97dp"
-                        android:layout_height="63dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/check_box"
-                        android:gravity="center"
-                        android:orientation="vertical" >
+                        android:layout_width="180dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="0.00"
+                        android:orientation="vertical"
+                        android:paddingBottom="20dp" >
 
                         <TextView
-                            android:id="@+id/checks"
+                            android:id="@+id/sucTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/checks"
-                            android:textColor="@color/grisLista"
-                            android:textSize="15sp" />
+                            android:layout_marginTop="5dp"
+                            android:text="@string/direccion"
+                            android:textColor="@color/rojo"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/direccion"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/addressRest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:ellipsize="none"
+                            android:maxLines="100"
+                            android:scrollHorizontally="false"
+                            android:text="@string/addrs" />
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/tel"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/phoneRest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:text="@string/phone" />
+
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/horarios"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/daysRest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:text="@string/dias" />
+
+                        <TextView
+                            android:id="@+id/hoursRest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:text="@string/hras" />
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/web"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/webRest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:text="@string/paginasalad"
+                            android:textColor="@color/link" />
                     </LinearLayout>
 
-                    <Button
-                        android:id="@+id/checkInbtn"
-                        android:layout_width="113dp"
-                        android:layout_height="44dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="3dp"
-                        android:background="@drawable/btn_check"
-                        android:paddingLeft="17dp"
-                        android:text="@string/checkIn"
-                        android:textColor="@color/blanco"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="0.01"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal" >
 
-                    <Button
-                        android:id="@+id/menubtn"
-                        android:layout_width="113dp"
-                        android:layout_height="44dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="3dp"
-                        android:background="@drawable/menu"
-                        android:paddingLeft="17dp"
-                        android:text="@string/menu"
-                        android:textColor="@color/blanco"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="0dip"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="30dp"
+                            android:layout_weight="0.49"
+                            android:orientation="vertical" >
 
-                    <ImageView
-                        android:id="@+id/share"
-                        android:layout_width="75dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="right"
-                        android:layout_marginTop="8dp"
-                        android:contentDescription="@string/img"
-                        android:src="@drawable/share" />
+                            <LinearLayout
+                                android:layout_width="97dp"
+                                android:layout_height="63dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/check_box"
+                                android:gravity="center"
+                                android:orientation="vertical" >
 
-                    <ImageView
-                        android:id="@+id/tweet"
-                        android:layout_width="75dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="right"
-                        android:layout_marginTop="5dp"
-                        android:contentDescription="@string/img"
-                        android:src="@drawable/twitter" />
+                                <TextView
+                                    android:id="@+id/checks"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/checks"
+                                    android:textColor="@color/grisLista"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/checkInbtn"
+                                android:layout_width="113dp"
+                                android:layout_height="44dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="3dp"
+                                android:background="@drawable/btncheck"
+                                android:paddingLeft="17dp"
+                                android:text="@string/checkIn"
+                                android:textColor="@color/blanco"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/menubtn"
+                                android:layout_width="113dp"
+                                android:layout_height="44dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="3dp"
+                                android:background="@drawable/btnmenu"
+                                android:paddingLeft="17dp"
+                                android:text="@string/menu"
+                                android:textColor="@color/blanco"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/share"
+                                android:layout_width="75dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="right"
+                                android:layout_marginTop="8dp"
+                                android:contentDescription="@string/img"
+                                android:src="@drawable/share" />
+
+                            <ImageView
+                                android:id="@+id/tweet"
+                                android:layout_width="75dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="right"
+                                android:layout_marginTop="5dp"
+                                android:contentDescription="@string/img"
+                                android:src="@drawable/twitter" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
+               </ScrollView>
             </LinearLayout>
-
-        </LinearLayout>
-
+        
     </LinearLayout>
 
 </LinearLayout>

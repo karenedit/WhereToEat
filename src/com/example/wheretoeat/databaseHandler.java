@@ -157,23 +157,24 @@ public class databaseHandler extends SQLiteOpenHelper{
 		
 		if (cursor != null) cursor.moveToFirst();
 		
+				
 		Restaurant restaurant = new Restaurant(
 				Integer.parseInt(cursor.getString(0)), 
-				Integer.parseInt(cursor.getString(1)), 
-				Integer.parseInt(cursor.getString(2)), 
 				Integer.parseInt(cursor.getString(3)), 
-				Integer.parseInt(cursor.getString(4)), 
-				cursor.getString(5), 
-				cursor.getString(6), 
+				Integer.parseInt(cursor.getString(5)), 
+				Integer.parseInt(cursor.getString(6)), 
+				Integer.parseInt(cursor.getString(15)), 
+				cursor.getString(1), 
+				cursor.getString(2), 
+				cursor.getString(4), 
 				cursor.getString(7), 
 				cursor.getString(8), 
 				cursor.getString(9), 
 				cursor.getString(10), 
 				cursor.getString(11), 
 				cursor.getString(12), 
-				cursor.getString(13), 
-				cursor.getString(14),
-				cursor.getString(15)
+				cursor.getString(13),
+				cursor.getString(14)
 		);
 		
 		return restaurant; //return restaurant
@@ -266,6 +267,27 @@ public class databaseHandler extends SQLiteOpenHelper{
 		cursor.close();
 		return count;
 	}
+	
+	
+	/**
+	 * Metodo que actualiza el número de check in del restaurante
+	 * @param id : el id del restaurante a actualizar
+	 * 
+	 */
+	//Getting contacts Count
+	public void updateChecks(Restaurant restaurante){
+		int id = restaurante.getId();
+		int numchecks = restaurante.getCheckin();
+		numchecks ++;
+		SQLiteDatabase db = this.getWritableDatabase();
+		String countQuery = "UPDATE " + TABLE_RESTAURANTS + " SET " + KEY_CHECKIN + " = " + numchecks + " WHERE " +  KEY_PID + " = " + id;
+		db.execSQL(countQuery);
+		restaurante.setCheckin(numchecks);
+		Cursor cursor = db.rawQuery(countQuery, null);
+		cursor.close();
+	}
+	
+
 	
 	public List<Restaurant> getByCategory(int category){
 		List<Restaurant> restaurantsList = new ArrayList<Restaurant>();
