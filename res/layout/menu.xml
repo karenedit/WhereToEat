@@ -42,38 +42,20 @@
         android:background="@drawable/bg"
         android:gravity="top"
         android:orientation="vertical"
-        android:padding="7dp" >
+        android:padding="7dp"
+        android:paddingBottom="20dp" >
 
-        <LinearLayout
-            android:id="@+id/tituloCont"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:gravity="center" >
-
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/border"
-                android:ems="10"
-                android:hint="@string/buscar"
-                android:inputType="textPostalAddress"
-                android:padding="5dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <ImageView
+            android:id="@+id/imgRest"
             android:layout_width="match_parent"
             android:layout_height="101dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/spr" >
-        </LinearLayout>
+            android:layout_marginTop="3dp"
+            android:contentDescription="@string/img" />
 
         <GridView
             android:id="@+id/gridView1"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="270dp"
             android:numColumns="3" >
         </GridView>
 
